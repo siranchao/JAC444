@@ -29,7 +29,7 @@ public class CrapsWithMoney extends Craps{
 	
 	/**
 	 * this method return the private member balance
-	 * @return balance
+	 * @return current balance 
 	 */
 	public int getBalance() {
 		return this.balance;
@@ -37,7 +37,7 @@ public class CrapsWithMoney extends Craps{
 	
 	/**
 	 * this method specify playGame() with money involved
-	 * @param scan
+	 * @param scan input Scanner
 	 */
 	public void gamble(Scanner scan) {
 		System.out.print("Please enter a wager(minimum $1): ");

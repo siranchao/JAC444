@@ -25,8 +25,7 @@ public class Decrypt {
 	
 	/**
 	 * This method calculate the decrypted input and print the value
-	 * @param input
-	 * @return void
+	 * @param input integer for decode
 	 */
 	public void convert(int input) {
 		

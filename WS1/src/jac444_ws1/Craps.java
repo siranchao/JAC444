@@ -50,7 +50,7 @@ public class Craps {
 	
 	/**
 	 * this method check sum of each roll and print results based on game rules
-	 * @param sum
+	 * @param sum of each roll
 	 */
 	public void checkResult(int sum) {	
 		
@@ -90,7 +90,7 @@ public class Craps {
 	
 	/**
 	 * this is the main controller method of the game
-	 * @param scan
+	 * @param scan input Scanner
 	 */
 	public void playGame(Scanner scan) {
 		

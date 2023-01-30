@@ -28,8 +28,7 @@ public class Encrypt {
 	
 	/**
 	 * This method calculate the encrypt input and print the value
-	 * @param input
-	 * @return void
+	 * @param input integer for encode
 	 */
 	public void convert(int input) {
 		
