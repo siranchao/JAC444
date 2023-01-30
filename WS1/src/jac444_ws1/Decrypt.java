@@ -1,3 +1,15 @@
+/**********************************************
+Workshop 1
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 01/29/2023
+**********************************************/
+
 package jac444_ws1;
 
 /**This class is a simple scheme for decrypting data

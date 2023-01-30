@@ -1,3 +1,15 @@
+/**********************************************
+Workshop 1
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 01/29/2023
+**********************************************/
+
 package jac444_ws1;
 
 /**This class create Craps game, the program act in single player to perform the dice game
@@ -10,7 +22,8 @@ public class Craps {
 	public int diceA;
 	public int diceB;
 	public int savePoint;
-	private boolean cont;
+	// result -1: pending, 1: win, 0: lose
+	public int result;
 	
 	/**
 	 * Default constructor setting two dices to 1;
@@ -18,7 +31,7 @@ public class Craps {
 	public Craps() {
 		this.diceA = this.diceB = 1;
 		this.savePoint = 0;
-		this.cont = true;
+		this.result = -1;
 		System.out.println("--- Craps Game Start! ---");
 	}
 	
@@ -40,6 +53,8 @@ public class Craps {
 	 * @param sum
 	 */
 	public void checkResult(int sum) {	
+		
+		
 		//check result depends on if the game was saved
 		if(this.savePoint == 0) {
 			switch(sum) {
@@ -47,12 +62,12 @@ public class Craps {
 			case 3:
 			case 12:
 				System.out.println("Craps, Better Luck Next Time, You lose");
-				this.cont = false;
+				this.result = 0;
 				break;
 			case 7:
 			case 11:
 				System.out.println("Congratulations, You win");
-				this.cont = false;
+				this.result= 1;
 				break;
 			default:
 				this.savePoint = sum;
@@ -63,11 +78,11 @@ public class Craps {
 		else {
 			if(sum == 7) {
 				System.out.println("Craps, Better Luck Next Time, You lose");
-				this.cont = false;
+				this.result = 0;
 			}
 			if(sum == this.savePoint) {
 				System.out.println("Congratulations, You win");
-				this.cont = false;
+				this.result = 1;
 			}
 		}
 		
@@ -75,9 +90,9 @@ public class Craps {
 	
 	/**
 	 * this is the main controller method of the game
+	 * @param scan
 	 */
-	public void playGame() {
-		Scanner scan = new Scanner(System.in);
+	public void playGame(Scanner scan) {
 		
 		do {
 			System.out.print("Press any key to roll the dice: ");
@@ -85,30 +100,34 @@ public class Craps {
 				checkResult(roll());
 			}
 			
-		} while(this.cont);
+		} while(this.result == -1);
 		
-		resetGame();
-		//scan.close();
 	}
+	
 	
 	/**
 	 * reset the game and set saved point to 0
 	 */
 	public void resetGame() {
 		this.savePoint = 0;
-		this.cont = true;
+		this.result = -1;
 		System.out.println("--- Craps Game Reset! ---");
 	}
 	
 	
 	public static void main(String[] args) {
 		
+		Scanner scan = new Scanner(System.in);
 		Craps newGame = new Craps();
 		
 		//play the game 4 times
 		for(int i = 0; i < 4; i++) {
 			System.out.println("GAME: " + (i+1));
-			newGame.playGame();
+			newGame.playGame(scan);
+			newGame.resetGame();
+			scan.nextLine();
 		}
+		
+		scan.close();
 	}
 }
