@@ -75,7 +75,7 @@ public class CrapsWithMoney extends Craps{
 	public void chatter() {
 		String[] list = {
 				"Take a shot and win big...",
-				"Oh, you’re going for broke, huh?",
+				"Oh, you're going for broke, huh?",
 				"Aw c’mon, take a chance!",
 				"You’re up big. Now’s the time to cash in your chips!",
 		};
