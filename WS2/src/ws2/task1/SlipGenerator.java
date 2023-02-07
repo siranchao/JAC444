@@ -1,7 +1,6 @@
 package ws2.task1;
 
 import java.util.Random;
-
 /**
  * This class will randomly generate Slip data with given days and number of salesman
  * all data will be stored in a 2D array with type SaleSlip[][]
@@ -11,18 +10,16 @@ import java.util.Random;
 public class SlipGenerator {
 	
 	/**
-	 * static constant numOfSales define number of people
 	 * pool store all slip data in one 2D array
 	 */
-	public static final int numOfSales = 4;
 	public SaleSlip[][] pool;
 	
+	
 	/**
-	 * constructor with params define size of the data pool with days
-	 * @param days: size of the pool based on days
+	 * constructor without params define size of the data pool with days
 	 */
-	public SlipGenerator(int days) {
-		this.pool = new SaleSlip[days][numOfSales*5];
+	public SlipGenerator() {
+		pool = new SaleSlip[Test.days][Test.numOfSales*Test.productList.length];
 		System.out.println("--- Data generator initiated ---");
 	}
 
@@ -31,11 +28,11 @@ public class SlipGenerator {
 	 * this method randomly generate an array of Slip to record a salesman's daily performance
 	 * the method randomly decide how many and which product the salesman sold and generate an array without duplicate product
 	 * random sales amount per slip $10.0 - $100.00
-	 * @param salesID: salesID
+	 * @param salesID sales number
 	 * @return array of Slip sold per day
 	 */
 	private SaleSlip[] dailySlip(int salesID) {
-		int[] productList = {1, 2, 3, 4, 5};
+		int[] productList = (int[])Test.productList.clone();
 		
 		//how many slips made today
 		int num = (int)(Math.random() * (productList.length + 1));
@@ -69,7 +66,7 @@ public class SlipGenerator {
 	public void generateData() {
 		for(int i = 0; i < pool.length; i++) {
 
-			for(int j = 1, k = 0; j < 5; j++) {
+			for(int j = 1, k = 0; j <= Test.numOfSales; j++) {
 				SaleSlip[] result = dailySlip(j);
 				System.arraycopy(result, 0, pool[i], k, result.length);
 				k += result.length;

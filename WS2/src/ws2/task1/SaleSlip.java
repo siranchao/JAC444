@@ -6,12 +6,11 @@ package ws2.task1;
  * @author Siran
  *
  */
-
 public class SaleSlip {
 	
 	/**
 	 * salesID - salesperson number (1-4)
-	 * productID - product for each slip assume (111 - 555)
+	 * productID - product for each slip assume (1 - 5)
 	 * amount - total sales on the slip
 	 */
 	private int salesID;
@@ -29,9 +28,9 @@ public class SaleSlip {
 	
 	/**
 	 * constructor with parameters defined
-	 * @param sale: salesID
-	 * @param product: productID
-	 * @param amount: total value
+	 * @param sale salesID
+	 * @param product productID
+	 * @param amount total value
 	 */
 	public SaleSlip (int sale, int product, double amount) {
 		this.salesID = sale;
