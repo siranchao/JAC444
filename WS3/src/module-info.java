@@ -1,0 +1,2 @@
+module ws3 {
+}
