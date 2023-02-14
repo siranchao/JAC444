@@ -31,9 +31,6 @@ public class AdvancedTicket extends Ticket{
 	}
 	
 	@Override
-	/**
-	 * this override method will return price of current object
-	 */
 	public double getPrice() {
 		return price;
 	}

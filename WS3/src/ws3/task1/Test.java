@@ -38,19 +38,13 @@ public class Test {
 	 * test override method and constructor
 	 */
 	public static void checkInheritance() {
-		//1
-		Ticket ticket1 = new Ticket();
-		Ticket ticket2 = new Ticket(ID++);
-		System.out.println(ticket1);
-		System.out.println(ticket2);
-		
-		//2
+		//walkup
 		WalkupTicket walkup1 = new WalkupTicket();
 		WalkupTicket walkup2 = new WalkupTicket(ID++);
 		System.out.println(walkup1);
 		System.out.println(walkup2);
 		
-		//3
+		//advanced
 		AdvancedTicket adv1 = new AdvancedTicket();
 		AdvancedTicket adv2 = new AdvancedTicket(ID++, 18);
 		AdvancedTicket adv3 = new AdvancedTicket(ID++, 3);
@@ -58,7 +52,7 @@ public class Test {
 		System.out.println(adv2);
 		System.out.println(adv3);
 		
-		//4
+		//student advanced
 		StuAdvancedTicket student1 = new StuAdvancedTicket();
 		StuAdvancedTicket student2 = new StuAdvancedTicket(ID++, 12);
 		StuAdvancedTicket student3 = new StuAdvancedTicket(ID++, 4);

@@ -1,16 +1,16 @@
 package ws3.task1;
 
 /**
- * This class represent a super class of all kinds of tickets, and define the key methods of a ticket
+ * This abstract class represent a super class of all kinds of tickets, and define the key methods of a ticket
  * @author Siran
  *
  */
-public class Ticket {
+public abstract class Ticket {
 	
 	/**
-	 * protected field ticket ID
+	 * ID for each ticket
 	 */
-	protected int ticketID;
+	public int ticketID;
 	
 	/**
 	 * Constructor without parameters, will create an empty ticket with ID equal 0
@@ -28,13 +28,12 @@ public class Ticket {
 		this.ticketID = ticketID;
 	}
 	
+	
 	/**
-	 * this method return the price of a ticket, for super class Ticket it returns 0.0
-	 * @return ticket price
+	 * this abstract method return the price of a ticket will be defined by subclasses
 	 */
-	public double getPrice() {
-		return 0.0;
-	}
+	public abstract double getPrice();
+	
 	
 	@Override
 	/**
