@@ -35,6 +35,11 @@ public class AdvancedTicket extends Ticket{
 		return price;
 	}
 	
+	@Override
+	public String toString(){
+		return ticketID == 0 ? "Invalid Ticket" : "Advanced ticket | Ticket Number: " + ticketID + ", Price: " + getPrice();
+	}
+	
 	/**
 	 * this method will change the price field based on parameter
 	 * @param price new price

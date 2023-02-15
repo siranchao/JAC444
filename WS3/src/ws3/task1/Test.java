@@ -12,6 +12,7 @@ Date: 02/10/2023
 
 package ws3.task1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -26,7 +27,6 @@ public class Test {
 	/**
 	 * set static constant for event date, prices for different tickets
 	 */
-	public static final LocalDate eventDate = LocalDate.of(2023, 4, 1);
 	public static final double walkup = 50.0;
 	public static final double advance1 = 30.0;
 	public static final double advance2 = 40.0;
@@ -68,17 +68,19 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		
-		//test Inheritance
-		checkInheritance();
+		//System.out.println("=========== test Inheritance ============");
+		//checkInheritance();
 		
 		
-		//test Polymorphism
+		System.out.println("=========== test Polymorphism ============");
+		
 		Scanner scan = new Scanner(System.in);
-		
 		Menu menu = new Menu();
 		menu.purchase(scan);
-		
 		scan.close();
+		
+		System.out.println("=========== Menu Closed ============");
+
 	}	
 
 }

@@ -34,5 +34,10 @@ public class WalkupTicket extends Ticket{
 		return price;
 	}
 	
+	
+	@Override
+	public String toString(){
+		return ticketID == 0 ? "Invalid Ticket" : "Walkup ticket | Ticket Number: " + ticketID + ", Price: " + getPrice();
+	}
 
 }

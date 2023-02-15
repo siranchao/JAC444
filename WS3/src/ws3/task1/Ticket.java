@@ -39,8 +39,6 @@ public abstract class Ticket {
 	/**
 	 * This method override toString() and display ticket information with ID and it's price
 	 */
-	public String toString() {
-		return ticketID == 0 ? "Invalid Ticket" : "Ticket Number: " + ticketID + ", Price: " + getPrice();
-	}
+	public abstract String toString();
 	
 }

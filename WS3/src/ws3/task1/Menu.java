@@ -1,5 +1,6 @@
 package ws3.task1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -15,19 +16,18 @@ public class Menu {
 	 * static field set ID start with 100
 	 */
 	private static int ticketID = 100;
+	private static int maxSeats = 30;
+	private static int maxAdcanceDays = 45;
 	
+	private Ticket[] sales; 
+	private int sold;
 	
-	/**
-	 * calculate day difference between today and event date
-	 * @return day difference
-	 */
-	private int dayDiff() {
-		LocalDate today = LocalDate.now();
-		int days = (int)ChronoUnit.DAYS.between(today, Test.eventDate);
-		return days;
+	public Menu() {
+		sales = new Ticket[maxSeats];
+		sold = 0;
 	}
 	
-	
+
 	/**
 	 * display header and ticket info
 	 */
@@ -46,9 +46,8 @@ public class Menu {
 	 */
 	public void purchase(Scanner scan) {
 		boolean run = true;
-		double subtotal = 0.0;
 		
-		while(run) {
+		while(run && sold < maxSeats) {
 			boolean flag = false;
 			int select = 0;
 			
@@ -67,33 +66,81 @@ public class Menu {
 			}
 			
 			Ticket ticket = null;
+			
 			switch(select) {
 				case 1:
 					ticket = new WalkupTicket(ticketID++);
+					sales[sold] = ticket;
+					sold++;
+					System.out.println(ticket);
 					break;
 				case 2:
-					ticket = new AdvancedTicket(ticketID++, dayDiff());
+					try {
+						System.out.print("How many days in advanced: ");
+						int days = scan.nextInt();
+						if(days <= maxAdcanceDays ) {
+							ticket = new AdvancedTicket(ticketID++, days);
+							sales[sold] = ticket;
+							sold++;
+							System.out.println(ticket);
+						} else {
+							System.out.println("Maximun advanced day is: " + maxAdcanceDays);
+						}
+					}
+					catch(InputMismatchException | NumberFormatException e) {
+						e.printStackTrace();
+						System.out.println("Warning! Invalid inputs");
+						scan.nextLine();
+					}
 					break;
 				case 3:
-					ticket = new StuAdvancedTicket(ticketID++, dayDiff());
+					try {
+						//validate student ID
+						System.out.print("Please enter student ID: ");
+						scan.nextInt();
+						
+						System.out.print("How many days in advanced: ");
+						int days = scan.nextInt();
+						
+						if(days <= maxAdcanceDays ) {
+							ticket = new StuAdvancedTicket(ticketID++, days);
+							sales[sold] = ticket;
+							sold++;
+							System.out.println(ticket);
+						} else {
+							System.out.println("Maximun advanced day is: " + maxAdcanceDays);
+						}
+					}
+					catch(InputMismatchException | NumberFormatException e) {
+						e.printStackTrace();
+						System.out.println("Warning! Invalid inputs");
+						scan.nextLine();
+					}
 					break;
 				default:
 					break;
 			}
-			
-			if(ticket != null)
-				subtotal += ticket.getPrice();
 
-			System.out.println(ticket);
-			
-			System.out.print("Continue purchase? (Y/N) ");
-			String val = scan.nextLine();
+			System.out.print((maxSeats-sold) + " Tickets left. Continue purchase? (Y/N)");
+
+			String val = scan.next();
 			if(val.charAt(0) == 'N' || val.charAt(0) == 'n') {
 				run = false;
-				System.out.println("Purchase complete, Subtotal: $" + subtotal);
+				summary();
 			}
 		}
 	}
 
+	
+	public void summary() {
+		double total = 0.0;
+		for(Ticket ticket : sales) {
+			if(ticket != null)
+				total += ticket.getPrice();
+		}
+		System.out.println("\n=========== Summary ============\n");
+		System.out.println("Total Tickets purchased: " + sold);
+		System.out.println("Subtotal: $" + total + "\n");
+	}
 
 }
