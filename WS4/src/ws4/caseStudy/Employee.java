@@ -35,8 +35,9 @@ public abstract class Employee implements Payable{
 	
 	@Override
 	public String toString() {
-		String msg = "Employee Name: " + getFirstName() + " " + getLastName() + "\nSocial Security Number: " + getSSN();
-		return msg;
+		String header = "\n---------- Bi-Weekly Payroll Slip ----------\n";
+		String msg = "- Employee Name: " + getFirstName() + " " + getLastName() + "\n- Social Security Number: " + getSSN() + "\n\n";
+		return header + msg;
 	}
 	
 	

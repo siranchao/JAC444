@@ -13,12 +13,12 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
 	/**
 	 * Define a constructor with parameters
 	 * this constructor validate base salary will throw an Exception when arguments are invalid
-	 * @param firstName
-	 * @param lastName
-	 * @param ssn
-	 * @param grossSales
-	 * @param commissionRate
-	 * @param baseSalary
+	 * @param firstName first name
+	 * @param lastName last name
+	 * @param ssn social security number
+	 * @param grossSales sales amount
+	 * @param commissionRate rate
+	 * @param baseSalary base salary
 	 */
 	public BasePlusCommissionEmployee(String firstName, String lastName, String ssn, double grossSales, double commissionRate, double baseSalary) {
 		super(firstName, lastName, ssn, grossSales, commissionRate);
@@ -37,16 +37,33 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
 		return baseSalary;
 	}
 	
+	/**
+	 * Setter method
+	 * @param increase percentage
+	 */
+	public void setBaseSalary(double increase) {
+		baseSalary *= (increase + 1.0);
+	}
+	
 	
 	@Override
 	public String toString() {
-		String msg = "\nEmployment Type: Base and Commission" + "\nBase Salary: " + getBaseSalary();
-		return super.toString() + msg;
+		String msg = "\n- Employment Type: Commission & Base" + "\n- With Base Salary: " + getBaseSalary();
+		String footer = "\n--------------------------------------------";
+		return super.toString() + msg + footer;
 	}
 	
 	@Override
 	public double getPaymentAmount() {
-		return getBaseSalary() * 1.1 + super.getPaymentAmount();
+		return getBaseSalary() * 2 + super.getPaymentAmount();
+	}
+	
+	@Override
+	/**
+	 * this method implementS abstract method from Payable interface
+	 */
+	public void displayAmount() {
+		System.out.println("Payment Amount: " + getPaymentAmount() + "\n");
 	}
 	
 }

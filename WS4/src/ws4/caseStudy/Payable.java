@@ -7,4 +7,5 @@ package ws4.caseStudy;
  */
 public interface Payable {
 	double getPaymentAmount();
+	void displayAmount();
 }

@@ -50,8 +50,9 @@ public class HourlyEmployee extends Employee {
 	
 	@Override
 	public String toString() {
-		String msg = "\nEmployment Type: Hourly";
-		return super.toString() + msg;
+		String msg = "- Employment Type: Hourly" + "\n- Hourly Wage: " + getWage() + "\n- Working Hours: " + getHours();
+		String footer = "\n--------------------------------------------";
+		return super.toString() + msg + footer;
 	}
 	
 	@Override
@@ -65,5 +66,14 @@ public class HourlyEmployee extends Employee {
 		
 		return amount;
 	}
+	
+	@Override
+	/**
+	 * this method implementS abstract method from Payable interface
+	 */
+	public void displayAmount() {
+		System.out.println("Payment Amount: " + getPaymentAmount() + "\n");
+	}
+	
 	
 }

@@ -30,6 +30,9 @@ public class Invoice implements Payable {
 	 * @param itemPrice price per item
 	 */
 	public Invoice(String partNumber, String partDesc, int qty, double itemPrice) {
+		if(qty <= 0 || itemPrice < 0.0) {
+			throw new IllegalArgumentException("Invalid arguments when calling constructor: Quantity and price must greater than 0.0");
+		}
 		this.partNumber = partNumber;
 		this.partDesc = partDesc;
 		this.qty = qty;
@@ -45,9 +48,19 @@ public class Invoice implements Payable {
 	}
 	
 	@Override
+	/**
+	 * this method implementS abstract method from Payable interface
+	 */
+	public void displayAmount() {
+		System.out.println("Payment Amount: " + getPaymentAmount() + "\n");
+	}
+	
+	@Override
 	public String toString() {
-		String msg = "Invoice Number: " + getPartNumber() + "\nDescription: " + getPartDesc() + "\nQuantity: " + getQty() + "\nItem Price: " + getItemPrice() + "\nTotoal Cost: " + getPaymentAmount();
-		return msg;
+		String header = "\n---------------------------\n";
+		String msg = "- Invoice Number: " + getPartNumber() + "\n- Description: " + getPartDesc() + "\n- Quantity: " + getQty() + "\n- Item Price: " + getItemPrice();
+		String footer = "\n---------------------------";
+		return header + msg + footer;
 	}
 	
 	/**

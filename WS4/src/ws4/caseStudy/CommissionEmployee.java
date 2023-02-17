@@ -49,8 +49,9 @@ public class CommissionEmployee extends Employee {
 	
 	@Override
 	public String toString() {
-		String msg = "\nEmployment Type: Commission" + "\nCommission Rate: " + getCommissionRate();
-		return super.toString() + msg;
+		String msg = "- Employment Type: Commission" + "\n- Commission Rate: " + getCommissionRate() + "\n- Sales Amount: " + getGrossSales();
+		String footer = "\n--------------------------------------------";
+		return super.toString() + msg + footer;
 	}
 	
 	@Override
@@ -59,6 +60,14 @@ public class CommissionEmployee extends Employee {
 	 */
 	public double getPaymentAmount() {
 		return getGrossSales() * getCommissionRate();
+	}
+	
+	@Override
+	/**
+	 * this method implementS abstract method from Payable interface
+	 */
+	public void displayAmount() {
+		System.out.println("Payment Amount: " + getPaymentAmount() + "\n");
 	}
 	
 }

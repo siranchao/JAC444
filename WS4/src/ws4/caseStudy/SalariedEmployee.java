@@ -36,8 +36,9 @@ public class SalariedEmployee extends Employee{
 	
 	@Override
 	public String toString() {
-		String msg = "\nEmployment Type: Fixed Salary" + "\nWeekly Salary: " + getWeeklySalary();
-		return super.toString() + msg;
+		String msg = "- Employment Type: Fixed Salary" + "\n- Weekly Salary: " + getWeeklySalary();
+		String footer = "\n--------------------------------------------";
+		return super.toString() + msg + footer;
 	}
 	
 	
@@ -46,8 +47,15 @@ public class SalariedEmployee extends Employee{
 	 * this method implementS abstract method from Payable interface
 	 */
 	public double getPaymentAmount() {
-		return getWeeklySalary() * 4;
+		return getWeeklySalary() * 2;
 	}
 	
+	@Override
+	/**
+	 * this method implementS abstract method from Payable interface
+	 */
+	public void displayAmount() {
+		System.out.println("Payment Amount: " + getPaymentAmount() + "\n");
+	}
 	
 }
