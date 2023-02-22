@@ -4,18 +4,32 @@ package ws4.caseStudy;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This class represent a Payroll system that can operate adding and displaying payroll slip for each type of payable object
+ * @author Siran
+ *
+ */
 public class Payroll {
 	
+	/**
+	 * Store payable items in an array, and keep tracking index number
+	 */
 	Payable[] items;
 	private int counter;
 	
-	
+	/**
+	 * No-args constructor define length of the array
+	 */
 	public Payroll() {
 		items = new Payable[Test.maxItems];
 		counter = 0;
 	}
 	
 	
+	/**
+	 * this method collecting info from Scanner inputs, and validate the input process. Then eventually create the Invoice object in the array 
+	 * @param scan Scanner
+	 */
 	public void addInvoice(Scanner scan) {
 		if(counter >= Test.maxItems) {
 			throw new IndexOutOfBoundsException("Reach Maximum item limits");
@@ -51,7 +65,11 @@ public class Payroll {
 	}
 	
 	
-	
+	/**
+	 * this method collecting info from Scanner inputs, and validate the input process. Then eventually create the Employee object in the array 
+	 * @param scan Scanner
+	 * @param type selection type
+	 */
 	public void addEmployee(Scanner scan, int type) {
 		if(counter >= Test.maxItems) {
 			throw new IndexOutOfBoundsException("Reach Maximum item limits");
@@ -123,6 +141,11 @@ public class Payroll {
 	}
 	
 
+	/**
+	 * this method acting like menu, display info and control the user logic
+	 * user can select options to adding and displaying Payable objects
+	 * @param scan
+	 */
 	public void menu(Scanner scan) {
 		boolean flag = false;
 		while(!flag) {
@@ -166,6 +189,9 @@ public class Payroll {
 	}
 	
 	
+	/**
+	 * this method will loop over the list and print all valid objects
+	 */
 	public void printAll() {
 		for(Payable item : items) {
 			if(item != null) {

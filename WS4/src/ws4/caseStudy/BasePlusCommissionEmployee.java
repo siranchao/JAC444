@@ -1,6 +1,6 @@
 package ws4.caseStudy;
 
-
+import java.text.DecimalFormat;
 /**
  * This class extends CommissionEmployee class which represent a more specific type of CommissionEmployee 
  * Base-salaried commission employees receive a base salary plus a percentage of their sales
@@ -9,7 +9,7 @@ package ws4.caseStudy;
  */
 public class BasePlusCommissionEmployee extends CommissionEmployee {
 	private double baseSalary;
-	
+	private static final DecimalFormat df = new DecimalFormat("0.00");
 	/**
 	 * Define a constructor with parameters
 	 * this constructor validate base salary will throw an Exception when arguments are invalid
@@ -48,7 +48,7 @@ public class BasePlusCommissionEmployee extends CommissionEmployee {
 	
 	@Override
 	public String toString() {
-		String msg = "\n- Employment Type: Commission & Base" + "\n- With Base Salary: " + getBaseSalary();
+		String msg = "\n- Employment Type: Commission & Base" + "\n- With Base Salary: " + df.format(getBaseSalary());
 		String footer = "\n--------------------------------------------";
 		return super.toString() + msg + footer;
 	}
