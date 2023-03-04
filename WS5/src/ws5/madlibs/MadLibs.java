@@ -16,7 +16,6 @@ import java.util.Scanner;
  */
 public class MadLibs {
 
-	
 	/**
 	 * this method will open and read an file as template and
 	 * scan multiple user's inputs to create a text file of madLib using I/O 
@@ -37,24 +36,28 @@ public class MadLibs {
 		System.out.print("Output file name: ");
 		outputPath = scan.nextLine();
 
-		//1.read line by line - FileReader	
-		//2.scan placeholder
-		//3.call prompt-with placeholder name - use method()
-		//4.replace string by user input - return new string
-		//5.write the string to output file
-		
+		//handle I/O
 		try(BufferedReader br = new BufferedReader(new FileReader(inputPath));
 			BufferedWriter bw = new BufferedWriter(new FileWriter(outputPath))) {
 
 			//read line-by-line
+			System.out.print("\n");
 			String currentLine;
 			while((currentLine = br.readLine()) != null) {
-				//process current line
 				
+				//process current line
+				if(currentLine.isEmpty()) {
+					bw.write(currentLine);
+				}
+				else {
+					String newLine = Util.handleLine(currentLine, scan);
+					bw.write(newLine);
+				}
+				bw.newLine();
 			}
+			bw.flush();
 			
-			
-			
+			System.out.println("Your mad-lib has been created!\n");
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -63,36 +66,6 @@ public class MadLibs {
 	
 		
 	}
-	
-	
-	/**
-	 * this method receives a String, and looking for placeholder
-	 * if any, will prompt for user input and create a new string replace placeholder with input tokens
-	 * @param line string to be processed 
-	 * @return new string
-	 */
-	public String handleLine(String line, Scanner scan) {
-		
-		StringBuilder newLine = new StringBuilder();
-		String[] words = line.split(" ");
-		
-		for(String word : words) {	
-			
-			if(word.indexOf(0) == '<') {
-				String placehoder = word.substring(1, word.length() - 1);
-				System.out.print("Please type a " + placehoder + ": ");
-				String token = scan.nextLine();
-				newLine.append(token + " ");
-			}
-			else {
-				newLine.append(word + " ");
-			}
-			
-		}
-		
-		return newLine.toString();
-	}
-	
 	
 	
 	
@@ -111,6 +84,18 @@ public class MadLibs {
 			System.out.print("File not found. Try again: ");
 			inputPath = scan.nextLine();
 			inputFile = new File(inputPath);
+		}
+		
+		try(BufferedReader br = new BufferedReader(new FileReader(inputPath))) {
+			String currentLine;
+			System.out.print("\n");
+			while((currentLine = br.readLine()) != null) {
+				System.out.println(currentLine);
+			}
+			System.out.print("\n");
+		}
+		catch(IOException e) {
+			e.printStackTrace();
 		}
 		
 		
@@ -136,26 +121,25 @@ public class MadLibs {
 			switch(select) {
 				case 'c':
 				case 'C':
-					System.out.println("**** Create a mad-lib ****");
+					System.out.println("\n**** Create a mad-lib ****");
 					createMadLib(scan);
 					break;
 				case 'v':
 				case 'V':
-					System.out.println("**** View a mad-lib ****");
+					System.out.println("\n**** View a mad-lib ****");
 					viewMadLib(scan);
 					break;
 				case 'q':
 				case 'Q':
 					run = false;
-					System.out.println("======== Program Ends ========");
+					System.out.println("\n======== Program Ends ========");
 					break;
 			}
 			
 		}
 		
 	
-	
-	
+		
 }
 
 
