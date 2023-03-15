@@ -1,3 +1,16 @@
+
+/**********************************************
+Workshop 6
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 03/15/2023
+**********************************************/
+
 package nameRank;
 
 import java.io.BufferedReader;

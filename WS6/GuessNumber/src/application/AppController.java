@@ -1,3 +1,16 @@
+
+/**********************************************
+Workshop 6
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 03/15/2023
+**********************************************/
+
 package application;
 
 import java.util.Random;
@@ -15,11 +28,9 @@ public class AppController {
 	private static final int MAX = 1000;
 	private static final int MIN = 0;
 	private int answer = rand.nextInt(MAX + 1);;
-	private int lastGap = 0;
 
 	private void resetGame() {
 		answer = rand.nextInt(MAX + 1);
-		lastGap = 0;
 		leftHint.setText("Game Starts!");
 		rightHint.setText("Please enter your first guess");
 		leftHint.setTextFill(Color.BLUE);
