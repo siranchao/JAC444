@@ -1,10 +1,10 @@
-package application;
+package view;
 
-import javax.swing.BorderFactory;
-import javax.swing.border.TitledBorder;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Pane;
@@ -15,16 +15,26 @@ import javafx.scene.layout.Pane;
  * @author Siran
  *
  */
-public class AddressPane {
-
-	/**
-	 * this method creates a pane with all elements mounted
-	 * @return addressPane
-	 */
-	@SuppressWarnings("exports")
-	public TitledPane createPane(String name) {
+public class AddressPane extends TitledPane{
+	private Pane p;
 	
-		Pane p = new Pane();
+	
+	/**
+	 * Constructor with two parameters, title and simple pane
+	 * @param name title of the pane
+	 */
+	public AddressPane(String name) {
+		super(name, new Pane());
+        setContent(createContent());
+	}
+	
+	
+	/**
+	 * this method create a simple pane with given labels and textFields
+	 * @return content of the titledPane
+	 */
+	public Pane createContent() {
+		p = new Pane();
 		
 		//setup all labels
 		p.getChildren().add(setupLabel("Name: ", 10, 20, 80, 30));
@@ -39,13 +49,9 @@ public class AddressPane {
 		p.getChildren().add(setupTf(100, 90, 300, 30));
 		p.getChildren().add(setupTf(100, 125, 300, 30));
 		p.getChildren().add(setupTf(100, 160, 300, 30));
-		
-		 // Set the title and border of the pane
-    	TitledPane frame = new TitledPane(name, p);
-		frame.setCollapsible(false);
         p.setPadding(new Insets(5, 5, 5, 5));
-        
-		return frame;
+		
+		return p;
 	}
 	
 	
@@ -58,7 +64,6 @@ public class AddressPane {
 	 * @param height set height
 	 * @return new label
 	 */
-	@SuppressWarnings("exports")
 	public Label setupLabel(String name, double x, double y, double width, double height) {
 		Label lb = new Label(name);
 		lb.relocate(x, y);
@@ -75,11 +80,32 @@ public class AddressPane {
 	 * @param height set height
 	 * @return new textField
 	 */
-	@SuppressWarnings("exports")
 	public TextField setupTf(double x, double y, double width, double height) {
 		TextField tf = new TextField();
 		tf.relocate(x, y);
 		tf.setPrefSize(width, height);
 		return tf;
 	}
+	
+	
+	
+	/**
+	 * this method will check if all the textField are filled
+	 * @return boolean
+	 */
+	public boolean checkInput() {
+		boolean res = true;
+		
+		//retrieve textField nodes and check
+		for(Node node : p.getChildren()) {
+			if(node instanceof TextField) {
+				if(((TextField)node).getText().trim().length() == 0) {
+					res = false;
+				}	
+			}
+		}
+		return res;
+	}
+	
+	
 }

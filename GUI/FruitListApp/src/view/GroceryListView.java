@@ -22,6 +22,7 @@ public class GroceryListView extends Pane{
 	public TextField getNewItemField() {
 		return newItemField;
 	}
+	
 	public GroceryListView(ItemList model) {
 		this.model = model;
 		

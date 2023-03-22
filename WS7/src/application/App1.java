@@ -3,11 +3,12 @@ package application;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.AddressPane;
 
-public class Main extends Application{
+public class App1 extends Application{
+	private AddressPane addrPane;
 
 	
 	@Override
@@ -23,8 +24,8 @@ public class Main extends Application{
 		mainPane.getChildren().add(box);
 		
 		//add address pane
-		AddressPane addressPane = new AddressPane();
-		TitledPane addrPane = addressPane.createPane("Contact Address");
+		addrPane = new AddressPane("Contact Address");
+		addrPane.setCollapsible(false);
 		addrPane.relocate(10, 50);
 		mainPane.getChildren().add(addrPane);
 		
