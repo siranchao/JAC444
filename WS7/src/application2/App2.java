@@ -1,10 +1,14 @@
 package application2;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.AddressItem;
 import model.ItemList;
 import view.AddressPane;
 import view.NameList;
@@ -23,7 +27,8 @@ public class App2 extends Application{
 	@Override
 	public void start(Stage ps) {
 		Pane mainPane = new Pane();
-
+		model = new ItemList();
+		
 		//add address pane
 		addrPane1 = new AddressPane("Home Address");
 		addrPane1.relocate(175, 10);
@@ -47,14 +52,40 @@ public class App2 extends Application{
 		
 		
 		//Add event listeners
-		removeBtn.setDisable(view.getList().getSelectionModel().getSelectedIndex() < 0);
+		removeBtn.setDisable(true);
+		removeBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent a) {
+				handleRemoveButtonPress();
+			}
+		});
 		
-		addBtn.setDisable(addrPane1.checkInput());
+		addBtn.setDisable(true);
 		
+		addBtnListener();
 		
+		addBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent a) {
+				handleAddButtonPress();
+			}
+		});
 		
+
+		view.getList().setOnMousePressed(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent m) {
+				handleListSelection();
+			}
+		});
 		
-		
+		addrPane1.setOnMousePressed(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent m) {
+				removeBtn.setDisable(true);
+			}
+		});
+		addrPane2.setOnMousePressed(new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent m) {
+				removeBtn.setDisable(true);
+			}
+		});
 		
 		
 		
@@ -68,6 +99,46 @@ public class App2 extends Application{
 		
 	}
 	
+	
+	private void handleAddButtonPress() {
+		//add address to model
+		AddressItem item = new AddressItem(addrPane1.getResults().get(0), addrPane1.getResults().get(1), addrPane1.getResults().get(2), addrPane1.getResults().get(3), addrPane1.getResults().get(4), addrPane2.getResults().get(0), addrPane2.getResults().get(1), addrPane2.getResults().get(2), addrPane2.getResults().get(3), addrPane2.getResults().get(4));
+		model.add(item);
+		
+		addrPane1.reset();
+		addrPane2.reset();
+		
+		view.update();
+	}
+	
+	
+	private void handleRemoveButtonPress() {
+		int index = view.getList().getSelectionModel().getSelectedIndex();
+		if(index >= 0) {
+			model.remove(index);
+			view.update();
+			removeBtn.setDisable(true);
+		}
+	}
+	
+	private void handleListSelection() {
+		view.update();
+		removeBtn.setDisable(model.size() == 0);
+	}
+	
+	
+	private void addBtnListener() {
+		for(int i = 0; i < 5; i++) {
+			addrPane1.getNodes().get(i).textProperty().addListener((observable, oldValue, newValue) -> {
+			    if (newValue.trim().isEmpty()) {
+			    	addBtn.setDisable(true);
+			    } else {
+			    	addBtn.setDisable(false);
+			    }
+			});
+		}
+	}
+		
 	
 	public static void main(String[] args) {
 		launch(args);

@@ -1,6 +1,8 @@
 package view;
 
 
+import java.util.ArrayList;
+
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -88,6 +90,23 @@ public class AddressPane extends TitledPane{
 	}
 	
 	
+	/**
+	 * this method return all the text results into arrayList
+	 * @return results
+	 */
+	public ArrayList<String> getResults() {
+		ArrayList<String> results = new ArrayList<>();
+		
+		for(Node node : p.getChildren()) {
+			if(node instanceof TextField) {
+				results.add(((TextField) node).getText().trim());
+			}
+		}
+			
+		return results;
+	}
+	
+	
 	
 	/**
 	 * this method will check if all the textField are filled
@@ -105,6 +124,33 @@ public class AddressPane extends TitledPane{
 			}
 		}
 		return res;
+	}
+	
+	
+	/**
+	 * this method will reset all textField to empty
+	 */
+	public void reset() {
+		for(Node node : p.getChildren()) {
+			if(node instanceof TextField) {
+				((TextField) node).setText("");
+			}
+		}
+	}
+	
+	/**
+	 * this method return all the textField nodes
+	 * @return
+	 */
+	public ArrayList<TextField> getNodes() {
+		ArrayList<TextField> nodes = new ArrayList<>();
+		for(Node node : p.getChildren()) {
+			if(node instanceof TextField) {
+				nodes.add((TextField)node);
+			}
+		}
+		
+		return nodes;
 	}
 	
 	
