@@ -1,10 +1,26 @@
+
+/**********************************************
+Workshop 7
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 03/22/2023
+**********************************************/
+
 package application2;
+
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -61,7 +77,7 @@ public class App2 extends Application{
 		
 		addBtn.setDisable(true);
 		
-		addBtnListener();
+		addListener();
 		
 		addBtn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent a) {
@@ -127,16 +143,22 @@ public class App2 extends Application{
 	}
 	
 	
-	private void addBtnListener() {
+	private void addListener() {
 		for(int i = 0; i < 5; i++) {
 			addrPane1.getNodes().get(i).textProperty().addListener((observable, oldValue, newValue) -> {
-			    if (newValue.trim().isEmpty()) {
-			    	addBtn.setDisable(true);
-			    } else {
-			    	addBtn.setDisable(false);
-			    }
+				addBtn.setDisable(allFilled(addrPane1.getNodes()));
 			});
 		}
+			
+	}
+	
+	private boolean allFilled(ArrayList<TextField> tfs) {
+		for (TextField tf : tfs) {
+			if(tf.getText().isEmpty()) {
+				return true;
+			}
+		}
+		return false;
 	}
 		
 	
