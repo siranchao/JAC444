@@ -1,3 +1,17 @@
+
+/**********************************************
+Workshop 8
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 03/29/2023
+**********************************************/
+
+
 package ws8.task1;
 import java.util.InputMismatchException;
 import java.util.Scanner;
