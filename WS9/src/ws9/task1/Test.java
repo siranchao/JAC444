@@ -1,3 +1,16 @@
+
+/**********************************************
+Workshop 9
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 04/03/2023
+**********************************************/
+
 package ws9.task1;
 
 import java.io.File;

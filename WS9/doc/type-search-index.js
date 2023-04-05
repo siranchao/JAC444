@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ws9.task1","l":"EditDistance"},{"p":"ws9.task1","l":"Test"}];updateSearchResults();
