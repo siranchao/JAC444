@@ -1,0 +1,38 @@
+/**********************************************
+Workshop 6 - Reflection
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+Date: 03/15/2023
+**********************************************/
+
+
+1. Use SceneBuilder to create a javaFx program can improve flexbility and coding efficiency. Overall, Scene Builder can be a powerful tool for designing JavaFX user interfaces, but it's important to weigh the advantages and disadvantages carefully and determine whether it's the right choice for your specific application and development workflow.
+Advantages:
+
+1). Visual UI Design: Scene Builder provides a drag-and-drop interface for designing user interfaces, which can be very helpful for visualizing the layout of your application and building UIs quickly.
+
+2). FXML Integration: Scene Builder is designed to work seamlessly with FXML, the XML-based markup language used to define JavaFX user interfaces. This makes it easy to build and modify UIs in Scene Builder and then load them into your JavaFX application.
+
+3). Reusability: Scene Builder allows you to create reusable UI components that can be saved as FXML files and used across multiple applications, which can save time and effort in the long run.
+
+4). CSS Integration: Scene Builder has built-in support for CSS styling, which can be applied to UI components directly within the tool. This can simplify the process of applying styles and maintaining consistency across your UIs.
+
+And there're still some shortages that may take place when developing javaFx program using this tool:
+1). Limited Customization: Although Scene Builder provides many UI elements and options for customization, it may not always offer the level of control that some developers require for their applications. In some cases, custom code may be necessary to achieve a desired effect.
+
+2). Maintenance: When using Scene Builder, it's important to keep in mind that any changes made to the UI using the tool will need to be reflected in the underlying code as well. This can make maintenance more challenging, especially if the application is complex or has many UI elements.
+
+3).Integration with IDEs: While Scene Builder can be used as a standalone tool, integrating it with an IDE can require additional setup and configuration.
+
+
+2. The logic behind scene for workshop6-task1: check name ranking app
+step1: create interface with at lease three textfield to collect user input and one button for submission. We can design the layout and style as free as we want.
+
+step2: we need to add event handler to the submit button once the user submit the query request. The base idea of the handler is to collect info for further process and open an new window to display the results.
+
+step3: validate and process user input from interface. We need to check if the year and gender text are validate before we start searching for results. Here used try-catch block to handle possible exceptions. And prompt error message to the new window and prevent the program termination. Once everything is checked, we shall start searching for results.
+
+step4: search result. There're multiple way to deal with the process. We can read all the data into one data container when the program launch, and consume the data set with quick and efficient query search. Or another way is to open a particular file based on user's selection. And read data from that selection file to search desired info. Here we used the second way to do so. Use BufferedReader to read the .txt file and process each line to search user's name. Evantually renturn the line # as rank, or "cannot find" reminder to frontend. This way has simple and straight-forward logic, but if the data set is large or user may submit massive queries when using. The first approach may be more efficient.

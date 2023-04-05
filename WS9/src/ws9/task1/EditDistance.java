@@ -17,6 +17,7 @@ public class EditDistance {
 	 * @param fileName
 	 */
 	public void readDict (String fileName) {
+		System.out.println("Start loading dictionary...\n");
 		try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
 			String line;
 			while((line = br.readLine()) != null) {
@@ -27,6 +28,7 @@ public class EditDistance {
 			e.printStackTrace();
 		}
 		computeMap();
+		System.out.println("Dictionary loading complete!\n");
 	}
 	
 	
@@ -136,7 +138,7 @@ public class EditDistance {
 		}
 		
 		//No path exist
-		System.out.println("No path exists from " + start  + "to" + end);
+		System.out.println("No path exists from " + start  + "to" + end + "\n");
 	}
 
 	
