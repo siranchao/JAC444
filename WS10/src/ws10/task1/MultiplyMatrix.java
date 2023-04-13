@@ -1,3 +1,16 @@
+
+/**********************************************
+Workshop 10
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 04/13/2023
+**********************************************/
+
 package ws10.task1;
 
 import java.text.DecimalFormat;
@@ -6,7 +19,7 @@ import java.util.Random;
 public class MultiplyMatrix {
 	public static int row = 2000;
 	public static int col = 2000;
-	public static int threads = 4;
+	public static int threads = 5;
 	
 	public static long startTime, elapsedTime;
 	
@@ -135,13 +148,14 @@ public class MultiplyMatrix {
 		displayMatrix(matrix_B, "B");
 		
 		
-//		System.out.println("===== Start testing sequential multiply matrix =====");
-//		startTime = System.nanoTime();
-//		sequentialMultiply();
-//		elapsedTime = System.nanoTime() - startTime;
-//		System.out.println("===== Execution complete =====");
-//		System.out.println("Elapsed Time is: " + (elapsedTime/1000000.0) + "  msec");
-//		displayMatrix(matrix_C, "results");
+		System.out.println("===== Start testing sequential multiply matrix =====");
+		startTime = System.nanoTime();
+		sequentialMultiply();
+		elapsedTime = System.nanoTime() - startTime;
+		System.out.println("===== Execution complete =====");
+		System.out.println("Elapsed Time is: " + (elapsedTime/1000000.0) + "  msec");
+		displayMatrix(matrix_C, "results");
+		
 		
 		System.out.println("\n\n");
 		System.out.println("===== Start testing parallel multiply matrix(total threads: " + threads + ") =====");
