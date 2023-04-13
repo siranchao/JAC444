@@ -2,27 +2,21 @@ package ws10.task2;
 
 public class Chopstick {
 	
-	private int id;
 	private boolean inuse;
 	
-	public Chopstick(int id){
-		this.id = id;
+	public Chopstick(){
 		this.inuse = false;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	
-	public void pickUp() {
+	public synchronized void pickUp() {
 		inuse = true;
 	}
 	
-	public void putDown() {
+	public synchronized void putDown() {
 		inuse = false;
 	}
 	
-	public boolean status() {
+	public boolean inuse() {
 		return inuse;
 	}
 	
