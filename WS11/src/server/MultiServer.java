@@ -3,10 +3,6 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -22,15 +18,10 @@ import javafx.stage.Stage;
 public class MultiServer extends Application{
 	
 	private static final int PORT = 5000;
-	private List<ChatThread> taskList = new ArrayList<>();
-	private int taskNum = 0;
-	
-	private LinkedList<String> log = new LinkedList<>();
-	private LinkedList<String> chat = new LinkedList<>();
-	private Label logLabel = new Label("Current running threads: " + taskNum);
-	private Label chatLabel = new Label("People in room: " + taskNum);
-	private TextArea logBox = new TextArea("Server Log: " + "\n");
-	private TextArea chatBox = new TextArea("Chat Messages: " + "\n");
+	private static int taskNum = 0;
+	private static Label logLabel = new Label("Current running threads: " + taskNum);
+	private static TextArea logBox = new TextArea("Server Log: " + "\n");
+	private static TextArea chatBox = new TextArea("Chat Messages: " + "\n");
 	
 	
 	private Thread serverThread = new Thread(() -> {
@@ -40,10 +31,14 @@ public class MultiServer extends Application{
 			while(true) {
 				Socket socket = ss.accept();
 				taskNum++;
-				taskList.add(new ChatThread(socket, taskNum));
-				taskList.get(taskNum-1).start();
-				log.add("Client #" + taskNum + " Connected...");
-				updateUI();
+				ChatThread task = new ChatThread(socket, taskNum);
+				task.setDaemon(true);
+				task.start();
+				
+				Platform.runLater(()->{
+					logBox.appendText("Client #" + taskNum + " Connected...");
+					logLabel.setText("Current running threads: " + taskNum);
+				});
 			}
 			
 		}
@@ -84,8 +79,7 @@ public class MultiServer extends Application{
         gridPane.add(runBtn, 0, 2);
         runBtn.setOnAction(event -> {
         	serverThread.start();
-        	log.add("Server starts, listening on PORT: " + PORT);
-        	updateUI();
+        	logBox.appendText("Server starts, listening on PORT: " + PORT);
         	runBtn.setDisable(true);
         });
         
@@ -94,8 +88,7 @@ public class MultiServer extends Application{
         GridPane.setMargin(exitBtn, new Insets(0, 0, 0, 150));
         gridPane.add(exitBtn, 0, 2);
         exitBtn.setOnAction(event -> {
-    		log.add("Server Terminated...");
-    		updateUI();
+    		logBox.appendText("Server Terminated...");
     		exitBtn.setDisable(true);
     		Platform.exit();
         });
@@ -125,29 +118,47 @@ public class MultiServer extends Application{
         
         if(section.equals("chat")) {
         	chatBox.setEditable(false);
-            GridPane.setConstraints(chatLabel, 0, 0);
             GridPane.setConstraints(chatBox, 0, 1);
-            gridPane.getChildren().addAll(chatLabel, chatBox);
+            gridPane.getChildren().addAll(chatBox);
         }
         return gridPane;
     }
 	
 	
-    private void updateUI() {
-    	logLabel.setText("Current running threads: " + taskNum);
-    	chatLabel.setText("Number of people: " + taskNum);
-
-    	if(!log.isEmpty())
-    		logBox.appendText(log.getLast() + "\n");
-    	
-    	if(!chat.isEmpty()) 
-    		chatBox.appendText(chat.getLast() + "\n");	
+    public static int getTaskNum() {
+    	return taskNum;
+    }
+    
+    public static void addTask() {
+    	taskNum++;
+    }
+    
+    public static void removeTask() {
+    	taskNum--;
+    }
+    
+    @SuppressWarnings("exports")
+	public static Label getLabel() {
+    	return logLabel;
+    }
+    
+    @SuppressWarnings("exports")
+	public static TextArea getLog() {
+    	return logBox;
     }
 
+	@SuppressWarnings("exports")
+	public static TextArea getChat() {
+    	return chatBox;
+    }
+    
     
     public static void main(String[] args) {
-        launch(args);
+
+    	launch(args);
     }
 	
+
+
 
 }
