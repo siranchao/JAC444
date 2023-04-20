@@ -34,7 +34,7 @@ public class ChatApp extends Application {
 	/**
 	 * this variable is defined as a Thread, running for the client
 	 */
-	private Thread chlientThread = new Thread(() -> {
+	private Thread clientThread = new Thread(() -> {
 		
 		try(Socket socket = new Socket("localhost", PORT)){
 			
@@ -138,8 +138,8 @@ public class ChatApp extends Application {
             exitButton.setDisable(false);
             messageField.requestFocus();
             
-            chlientThread.setDaemon(true);
-            chlientThread.start();
+            clientThread.setDaemon(true);
+            clientThread.start();
         });
 
         sendButton.setOnAction(event -> {
