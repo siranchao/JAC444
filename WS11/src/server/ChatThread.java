@@ -20,35 +20,42 @@ public class ChatThread extends Thread{
 
 	
 	@Override
-	public void run() {
-		
+	public void run() {	
 		try(BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			PrintWriter output = new PrintWriter(socket.getOutputStream(), true);) {
 			
 			while(true) {
-				String incomingData = input.readLine();
-				
-				Platform.runLater(()->{
-					MultiServer.getChat().appendText(incomingData);
-				});
-				
-				if (incomingData.equals("exit")) {
-					Platform.runLater(()->{				
-						MultiServer.getLog().appendText("Thread ID: " + threadId + " Server Terminated");
-						MultiServer.removeTask();
-						MultiServer.getLabel().setText("Current running threads: " + MultiServer.getTaskNum());
-					});
-
-					break;
+				if(input.ready()) {
+					String incomingData = input.readLine();
+					Platform.runLater(()->{
+						MultiServer.updateChat(incomingData);
+					});	
+					
+					if (incomingData.contains("exit")) {
+						Platform.runLater(()->{				
+							MultiServer.updateLog("Thread ID: " + threadId + " Server Terminated");
+							MultiServer.removeTask();
+							MultiServer.updateLabel();
+						});
+						System.out.println("Server thread terminated...");
+						break;
+					}
 				}
+
+				//return chat history
+				output.println(MultiServer.getLatestChat());
 				
-				output.println("Ping coming back from the server data is received: " + incomingData);
+				//Data transmission sync in every .5 second
+				Thread.sleep(500);
 			}
 		}
 		catch(IOException e) {
 			Platform.runLater(()->{
-				MultiServer.getLog().appendText("Thread ID: " + threadId + " Server Exception " + e.getMessage());
+				MultiServer.updateLog("Thread ID: " + threadId + " Server Exception " + e.getMessage());
 			});
+			e.printStackTrace();
+		} 
+		catch (InterruptedException e) {
 			e.printStackTrace();
 		}	
 	}

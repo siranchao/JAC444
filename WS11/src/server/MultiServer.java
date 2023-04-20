@@ -1,8 +1,23 @@
+/**********************************************
+Workshop 11
+Course: JAC444
+Last Name: CAO
+First Name: Siran
+ID: 159235209
+Section: NAA
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signature
+Date: 04/19/2023
+**********************************************/
+
 package server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -22,12 +37,15 @@ public class MultiServer extends Application{
 	private static Label logLabel = new Label("Current running threads: " + taskNum);
 	private static TextArea logBox = new TextArea("Server Log: " + "\n");
 	private static TextArea chatBox = new TextArea("Chat Messages: " + "\n");
+	private static List<String> log = new ArrayList<>();
+	private static List<String> chat = new ArrayList<>();
 	
-	
+	/**
+	 * this variable is defined as a Thread, running for the multi-thread server
+	 */
 	private Thread serverThread = new Thread(() -> {
 		
 		try(ServerSocket ss = new ServerSocket(PORT)) {
-			System.out.println("Multi-thread Server Launched...");
 			while(true) {
 				Socket socket = ss.accept();
 				taskNum++;
@@ -36,14 +54,14 @@ public class MultiServer extends Application{
 				task.start();
 				
 				Platform.runLater(()->{
-					logBox.appendText("Client #" + taskNum + " Connected...");
-					logLabel.setText("Current running threads: " + taskNum);
+					updateLog("Client #" + taskNum + " Connected...");
+					updateLabel();
 				});
 			}
 			
 		}
 		catch(IOException | IllegalArgumentException e) {
-			System.out.println("Server Exception: " + e.getMessage());
+			updateLog("Server Exception: " + e.getMessage());
 			e.printStackTrace();
 		}	
 	});
@@ -78,8 +96,9 @@ public class MultiServer extends Application{
         runBtn.setPrefWidth(120);
         gridPane.add(runBtn, 0, 2);
         runBtn.setOnAction(event -> {
+        	serverThread.setDaemon(true);
         	serverThread.start();
-        	logBox.appendText("Server starts, listening on PORT: " + PORT);
+        	updateLog("Multi-Server starts, listening on PORT: " + PORT);
         	runBtn.setDisable(true);
         });
         
@@ -88,7 +107,7 @@ public class MultiServer extends Application{
         GridPane.setMargin(exitBtn, new Insets(0, 0, 0, 150));
         gridPane.add(exitBtn, 0, 2);
         exitBtn.setOnAction(event -> {
-    		logBox.appendText("Server Terminated...");
+        	updateLog("Server Terminated...");
     		exitBtn.setDisable(true);
     		Platform.exit();
         });
@@ -103,6 +122,11 @@ public class MultiServer extends Application{
 	}
 	
 	
+	/**
+	 * this method create and return the section of TextArea
+	 * @param section
+	 * @return
+	 */
     private GridPane createTextArea(String section) {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10); // horizontal gap between columns
@@ -136,25 +160,32 @@ public class MultiServer extends Application{
     public static void removeTask() {
     	taskNum--;
     }
+    	
+	public static void updateLabel() {
+		logLabel.setText("Current running threads: " + taskNum);
+	}
     
-    @SuppressWarnings("exports")
-	public static Label getLabel() {
-    	return logLabel;
-    }
-    
-    @SuppressWarnings("exports")
-	public static TextArea getLog() {
-    	return logBox;
-    }
+	public static void updateLog(String msg) {
+		log.add(msg);
+		logBox.appendText(msg + "\n");
+	}
+	
+	public static void updateChat(String msg) {
+		chat.add(msg);
+		chatBox.appendText(msg + "\n");
+	}
+	
+	
+	/**
+	 * this method return the latest message in the list
+	 * @return
+	 */
+	public static String getLatestChat() {
+		return chat.isEmpty() ? "" : chat.get(chat.size() - 1);
+	}
 
-	@SuppressWarnings("exports")
-	public static TextArea getChat() {
-    	return chatBox;
-    }
-    
-    
+	
     public static void main(String[] args) {
-
     	launch(args);
     }
 	
