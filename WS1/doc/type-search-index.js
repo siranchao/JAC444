@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"jac444_ws1","l":"Craps"},{"p":"jac444_ws1","l":"CrapsWithMoney"},{"p":"jac444_ws1","l":"Decrypt"},{"p":"jac444_ws1","l":"Encrypt"}];updateSearchResults();
