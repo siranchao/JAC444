@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"ws4","l":"ws4.caseStudy"}];updateSearchResults();
