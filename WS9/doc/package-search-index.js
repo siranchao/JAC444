@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"ws9","l":"ws9.task1"}];updateSearchResults();
