@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"ws3.task1","l":"AdvancedTicket"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ws3.task1","l":"Menu"},{"p":"ws3.task1","l":"StuAdvancedTicket"},{"p":"ws3.task1","l":"Test"},{"p":"ws3.task1","l":"Ticket"},{"p":"ws3.task1","l":"WalkupTicket"}];updateSearchResults();
