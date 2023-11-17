@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ws2.task1","l":"Dashboard"},{"p":"ws2.task2","l":"GroceryItemOrder"},{"p":"ws2.task2","l":"GroceryList"},{"p":"ws2.task2","l":"Menu"},{"p":"ws2.task1","l":"SaleSlip"},{"p":"ws2.task1","l":"SlipGenerator"},{"p":"ws2.task1","l":"Test"},{"p":"ws2.task2","l":"Test"}];updateSearchResults();
